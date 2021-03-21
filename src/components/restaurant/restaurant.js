@@ -10,7 +10,7 @@ const Restaurant = ({ restaurant }) => {
 
   const averageRating = useMemo(() => {
     const total = reviews.reduce((acc, { rating }) => acc + rating, 0);
-    return (total / reviews.length).toFixed(1);
+    return Math.round(total / reviews.length);
   }, [reviews]);
 
   return (

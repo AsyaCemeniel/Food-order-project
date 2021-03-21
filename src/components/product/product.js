@@ -7,7 +7,7 @@ import PlusIcon from "./icons/plus.svg";
 import counter from "../../hocs/counter";
 
 const Product = ({ product, amount, increment, decrement }) => (
-  <div className={styles.product}>
+  <div className={styles.product} data-id="product">
     <div className={styles.content}>
       <div>
         <h4 className={styles.title}>{product.name}</h4>
