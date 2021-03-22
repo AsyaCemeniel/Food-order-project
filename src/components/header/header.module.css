@@ -3,6 +3,5 @@
   align-items: center;
   justify-content: center;
   height: 60px;
-  /*   background: var(--black); */
-  background: rgb(39, 38, 38);
+  background: var(--black);
 }
