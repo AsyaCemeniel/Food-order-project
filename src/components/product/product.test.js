@@ -15,4 +15,20 @@ describe("Product", () => {
 
     expect(component.find('[data-id="product"]').length).toBe(1);
   });
+  it("should init with amount 0", () => {
+    const component = mount(<Product product={product} />);
+
+    expect(component.find('[data-id="product-amount"]').text()).toBe("0");
+  });
+  it("should increment amount", () => {
+    const component = mount(<Product product={product} />);
+    component.find('[data-id="product-increment"]').simulate("click");
+    expect(component.find('[data-id="product-amount"]').text()).toBe("1");
+  });
+  it("should fetch data", () => {
+    const fn = jest.fn();
+    mount(<Product product={product} fetchData={fn} />);
+
+    expect(fn).toBeCalledWith(product.id);
+  });
 });
