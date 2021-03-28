@@ -29,14 +29,14 @@ const Product = ({ product, amount, decrement, fetchData, increment }) => {
             <div className={styles.buttons}>
               <button
                 className={styles.button}
-                onClick={decrement}
+                onClick={() => decrement(product.id)}
                 data-id="product-decrement"
               >
                 <img src={MinusIcon} alt="minus" />
               </button>
               <button
                 className={styles.button}
-                onClick={increment}
+                onClick={() => increment(product.id)}
                 data-id="product-increment"
               >
                 <img src={PlusIcon} alt="plus" />
@@ -61,8 +61,8 @@ Product.propTypes = {
   fetchData: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  amount: state.order,
+const mapStateToProps = (state, ownProps) => ({
+  amount: state.order[ownProps.product.id] || 0,
 });
 
 const mapDispatchToProps = {
