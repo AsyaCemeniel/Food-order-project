@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import styles from "./product.module.css";
 import MinusIcon from "./icons/minus.svg";
 import PlusIcon from "./icons/plus.svg";
+import { connect } from "react-redux";
+import { decrement, increment } from "../../redux/reducer/actions";
 
-import counter from "../../hocs/counter";
+/* import counter from "../../hocs/counter"; */
 
-const Product = ({ product, amount, increment, decrement, fetchData }) => {
+const Product = ({ product, amount, decrement, fetchData, increment }) => {
   useEffect(() => {
     fetchData && fetchData(product.id);
     //eslint-disable-next-line
@@ -59,4 +61,13 @@ Product.propTypes = {
   fetchData: PropTypes.func,
 };
 
-export default counter(Product);
+const mapStateToProps = (state) => ({
+  amount: state.order,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
