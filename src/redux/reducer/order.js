@@ -1,8 +1,10 @@
+import { DECREMENT, INCREMENT } from "../constants";
+
 export default (amount = 0, action) => {
   switch (action.type) {
-    case "INCREMENT":
+    case INCREMENT:
       return amount + 1;
-    case "DECREMENT":
+    case DECREMENT:
       return amount - 1;
 
     default:

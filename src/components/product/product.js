@@ -4,7 +4,7 @@ import styles from "./product.module.css";
 import MinusIcon from "./icons/minus.svg";
 import PlusIcon from "./icons/plus.svg";
 import { connect } from "react-redux";
-import { decrement, increment } from "../../redux/reducer/actions";
+import { decrement, increment } from "../../redux/actions";
 
 /* import counter from "../../hocs/counter"; */
 
