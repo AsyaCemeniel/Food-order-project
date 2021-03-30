@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-
 import Menu from "../menu";
 import Reviews from "../reviews";
 import Banner from "../banner";
 import Rate from "../rate";
-import styles from "./restaurant.module.css";
+import Tabs from "../tabs";
 
 const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant;
@@ -15,15 +14,17 @@ const Restaurant = ({ restaurant }) => {
     return Math.round(total / reviews.length);
   }, [reviews]);
 
+  const tabs = [
+    { title: "Menu", content: <Menu menu={menu} /> },
+    { title: "Reviews", content: <Reviews reviews={reviews} /> },
+  ];
+
   return (
     <div>
       <Banner heading={name}>
         <Rate value={averageRating} />
       </Banner>
-      <div className={styles.restaurant}>
-        <Menu menu={menu} />
-        <Reviews reviews={reviews} />
-      </div>
+      <Tabs tabs={tabs} />
     </div>
   );
 };
