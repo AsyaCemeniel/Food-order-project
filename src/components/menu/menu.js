@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import Product from "../product";
 
 import styles from "./menu.module.css";
+import Basket from "../basket";
 
 class Menu extends React.Component {
   static propTypes = {
@@ -32,6 +34,9 @@ class Menu extends React.Component {
           {menu.map((product) => (
             <Product key={product.id} product={product} />
           ))}
+        </div>
+        <div>
+          <Basket />
         </div>
       </div>
     );
