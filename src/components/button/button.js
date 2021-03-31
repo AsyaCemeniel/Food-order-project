@@ -2,9 +2,9 @@ import React from "react";
 import cn from "classnames";
 import styles from "./button.module.css";
 
-import PlusIcon from "../../icons/plus.svg'";
+import PlusIcon from "../../icons/plus.svg";
 import MinusIcon from "../../icons/minus.svg";
-import DeleteIcon from "../../icons/trash";
+import DeleteIcon from "../../icons/trash.svg";
 
 const icons = {
   plus: PlusIcon,
