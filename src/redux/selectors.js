@@ -24,3 +24,6 @@ export const totalSelector = createSelector(
   (orderProducts) =>
     orderProducts.reduce((acc, { subtotal }) => acc + subtotal, 0)
 );
+
+export const amountSelector = (state, ownProps) =>
+  state.order[ownProps.id] || 0;
