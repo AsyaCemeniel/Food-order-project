@@ -4,11 +4,11 @@ import ReviewForm from "./review-form";
 import Review from "./review";
 import styles from "./reviews.module.css";
 
-const Reviews = ({ reviews }) => {
+const Reviews = ({ reviewsId }) => {
   return (
     <div className={styles.reviews}>
-      {reviews.map((review) => (
-        <Review key={review.id} {...review} />
+      {reviewsId.map((id) => (
+        <Review key={id} id={id} />
       ))}
       <ReviewForm />
     </div>
@@ -16,11 +16,7 @@ const Reviews = ({ reviews }) => {
 };
 
 Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  reviewsId: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Reviews;

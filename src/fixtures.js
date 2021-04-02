@@ -153,7 +153,7 @@ const restaurants = [
         user: "Sam",
         text:
           "Finally! This place is amazing place for breakfast, lunch, dinner and supper",
-        rating: 5,
+        rating: 2,
       },
       {
         id: "381b0c31-6360-43ff-80d1-581a116159d8",
@@ -344,7 +344,7 @@ const normalizedReviews = [
     userId: "dfb982e9-b432-4b7d-aec6-7f6ff2e6af54",
     text:
       "Finally! This place is amazing place for breakfast, lunch, dinner and supper",
-    rating: 5,
+    rating: 2,
   },
   {
     id: "381b0c31-6360-43ff-80d1-581a116159d8",
