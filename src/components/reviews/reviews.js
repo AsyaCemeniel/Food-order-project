@@ -4,13 +4,13 @@ import ReviewForm from "./review-form";
 import Review from "./review";
 import styles from "./reviews.module.css";
 
-const Reviews = ({ reviewsId }) => {
+const Reviews = ({ reviewsId, restaurantId }) => {
   return (
     <div className={styles.reviews}>
       {reviewsId.map((id) => (
         <Review key={id} id={id} />
       ))}
-      <ReviewForm />
+      <ReviewForm restaurantId={restaurantId} />
     </div>
   );
 };

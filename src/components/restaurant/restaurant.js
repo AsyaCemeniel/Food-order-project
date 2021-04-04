@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Menu from "../menu";
 import Reviews from "../reviews";
@@ -10,11 +10,14 @@ import { averageRatingSelector } from "../../redux/selectors";
 
 //TODO
 const Restaurant = ({ restaurant, averageRating }) => {
-  const { name, menu, reviews } = restaurant;
+  const { name, menu, reviews, id } = restaurant;
 
   const tabs = [
     { title: "Menu", content: <Menu menu={menu} /> },
-    { title: "Reviews", content: <Reviews reviewsId={reviews} /> },
+    {
+      title: "Reviews",
+      content: <Reviews reviewsId={reviews} restaurantId={id} />,
+    },
   ];
 
   return (
