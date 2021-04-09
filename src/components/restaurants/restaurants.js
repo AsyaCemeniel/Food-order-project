@@ -1,34 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Restaurant from "../restaurant";
-import Loader from "../loader";
 
-import {
-  restaurantsListSelector,
-  restaurantsLoadingSelector,
-  restaurantsLoadedSelector,
-} from "../../redux/selectors";
-import { loadRestaurants } from "../../redux/actions";
+import { restaurantsListSelector } from "../../redux/selectors";
 
 import styles from "./restaurants.module.css";
 
-const Restaurants = ({
-  restaurants,
-  loadRestaurants,
-  loading,
-  loaded,
-  match,
-  history,
-}) => {
-  useEffect(() => {
-    if (!loading && !loaded) loadRestaurants();
-  }, []); //eslint-disable-line
-
-  if (loading || !loaded) return <Loader />;
-
+const Restaurants = ({ restaurants, match, history }) => {
   const { restId } = match.params;
 
   const restaurant = restaurants.find((rest) => rest.id === restId);
@@ -60,11 +41,6 @@ Restaurants.propTypes = {
   ).isRequired,
 };
 
-export default connect(
-  (state) => ({
-    restaurants: restaurantsListSelector(state),
-    loading: restaurantsLoadingSelector(state),
-    loaded: restaurantsLoadedSelector(state),
-  }),
-  { loadRestaurants }
-)(Restaurants);
+export default connect((state) => ({
+  restaurants: restaurantsListSelector(state),
+}))(Restaurants);
