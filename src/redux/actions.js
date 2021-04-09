@@ -56,21 +56,12 @@ export const loadReviews = (restaurantId) => async (dispatch, getState) => {
   }
 };
 
-export const loadUsers = () => async (dispatch, getState) => {
+export const loadUsers = () => (dispatch, getState) => {
   const state = getState();
   const loading = usersLoadingSelector(state);
   const loaded = usersLoadedSelector(state);
 
   if (loading || loaded) return;
 
-  dispatch({ type: LOAD_USERS + REQUEST });
-
-  try {
-    const data = await fetch("/api/users");
-    const response = await data.json();
-
-    dispatch({ type: LOAD_USERS + SUCCESS, response });
-  } catch (error) {
-    dispatch({ type: LOAD_USERS + FAILURE, error });
-  }
+  dispatch({ type: LOAD_USERS, CallAPI: "/api/users" });
 };
