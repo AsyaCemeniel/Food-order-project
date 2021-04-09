@@ -53,7 +53,7 @@
 .name span {
   color: var(--black);
   line-height: 1.2;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .name > a {
