@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Route } from "react-router-dom";
 import Menu from "../menu";
 import Reviews from "../reviews";
 import Banner from "../banner";
@@ -10,10 +11,10 @@ import { averageRatingSelector } from "../../redux/selectors";
 
 const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
   const tabs = [
-    { title: "Menu", content: <Menu menu={menu} restaurantId={id} /> },
+    { title: "Menu", to: `/restaurants/${id}/menu` },
     {
       title: "Reviews",
-      content: <Reviews reviews={reviews} restaurantId={id} />,
+      to: `/restaurants/${id}/reviews`,
     },
   ];
 
@@ -23,6 +24,14 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
       <Tabs tabs={tabs} />
+      <Route
+        path="/restaurants/:restId/menu"
+        render={() => <Menu menu={menu} restaurantId={id} />}
+      />
+      <Route
+        path="/restaurants/:restId/reviews"
+        render={() => <Reviews reviews={reviews} restaurantId={id} />}
+      />
     </div>
   );
 };
