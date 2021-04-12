@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import Menu from "../menu";
 import Reviews from "../reviews";
@@ -23,14 +23,17 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
       <Tabs tabs={tabs} />
-      <Route
-        path="/restaurants/:restId/menu"
-        render={() => <Menu menu={menu} restaurantId={id} />}
-      />
-      <Route
-        path="/restaurants/:restId/reviews"
-        render={() => <Reviews reviews={reviews} restaurantId={id} />}
-      />
+      <Switch>
+        <Route
+          path="/restaurants/:restId/menu"
+          render={() => <Menu menu={menu} restaurantId={id} />}
+        />
+        <Route
+          path="/restaurants/:restId/reviews"
+          render={() => <Reviews reviews={reviews} restaurantId={id} />}
+        />
+        <Redirect from="/restaurants/:restId" to={`/restaurants/${id}/menu`} />
+      </Switch>
     </div>
   );
 };
