@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import Restaurants from "../restaurants";
 import Loader from "../loader";
 
@@ -26,6 +26,11 @@ function RestaurantsPage({
   if (loading || !loaded) return <Loader />;
 
   if (match.isExact) {
+    if (loaded) {
+      return (
+        <Redirect to="/restaurants/a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2/menu" />
+      );
+    }
     return (
       <>
         <Restaurants match={match} history={history} />
