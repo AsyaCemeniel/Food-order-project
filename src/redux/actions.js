@@ -1,3 +1,4 @@
+import { replace } from "connected-react-router";
 import {
   INCREMENT,
   DECREMENT,
@@ -47,12 +48,13 @@ export const loadReviews = (restaurantId) => async (dispatch, getState) => {
   if (loading || loaded) return;
   dispatch({ type: LOAD_REVIEWS + REQUEST, restaurantId });
   try {
-    const response = await fetch(
-      `/api/reviews?id=${restaurantId}`
-    ).then((res) => res.json());
+    const response = await fetch(`/api/review?id=${restaurantId}`).then((res) =>
+      res.json()
+    );
     dispatch({ type: LOAD_REVIEWS + SUCCESS, response, restaurantId });
   } catch (error) {
     dispatch({ type: LOAD_REVIEWS + FAILURE, error, restaurantId });
+    dispatch(replace("/error"));
   }
 };
 
