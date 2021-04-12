@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import Menu from "../menu";
 import Reviews from "../reviews";
@@ -9,12 +10,11 @@ import { connect } from "react-redux";
 import { averageRatingSelector } from "../../redux/selectors";
 
 const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
+  if (!id) return null;
+
   const tabs = [
-    { title: "Menu", content: <Menu menu={menu} restaurantId={id} /> },
-    {
-      title: "Reviews",
-      content: <Reviews reviews={reviews} restaurantId={id} />,
-    },
+    { title: "Menu", to: `/restaurants/${id}/menu` },
+    { title: "Reviews", to: `/restaurants/${id}/reviews` },
   ];
 
   return (
@@ -23,6 +23,14 @@ const Restaurant = ({ id, name, menu, reviews, averageRating }) => {
         {!!averageRating && <Rate value={averageRating} />}
       </Banner>
       <Tabs tabs={tabs} />
+      <Route
+        path="/restaurants/:restId/menu"
+        render={() => <Menu menu={menu} restaurantId={id} />}
+      />
+      <Route
+        path="/restaurants/:restId/reviews"
+        render={() => <Reviews reviews={reviews} restaurantId={id} />}
+      />
     </div>
   );
 };
