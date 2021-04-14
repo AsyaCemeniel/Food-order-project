@@ -9,12 +9,15 @@ import App from "./components/app";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import history from "./history";
+import { MoneyProvider } from "./contexts/money";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App />
+        <MoneyProvider>
+          <App />
+        </MoneyProvider>
       </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
