@@ -9,12 +9,26 @@ import "./basket.css";
 import BasketRow from "./basket-row";
 import BasketItem from "./basket-item";
 import Button from "../button";
-import { orderProductsSelector, totalSelector } from "../../redux/selectors";
+import {
+  checkoutMatchSelector,
+  orderLoadingSelector,
+  orderProductsSelector,
+  totalSelector,
+} from "../../redux/selectors";
+import { makeOrder } from "../../redux/actions";
 
 import { Consumer as UserConsumer } from "../../contexts/user";
 import { useMoney } from "../../hooks/use-money";
+import Loader from "../loader";
 
-function Basket({ title = "Basket", total, orderProducts }) {
+function Basket({
+  title = "Basket",
+  total,
+  orderProducts,
+  checkoutMatch,
+  loading,
+  makeOrder,
+}) {
   const money = useMoney();
 
   if (!total) {
@@ -27,6 +41,7 @@ function Basket({ title = "Basket", total, orderProducts }) {
 
   return (
     <div className={styles.basket}>
+      {loading && <Loader />}
       <h4 className={styles.title}>
         <UserConsumer>{({ userName }) => `${userName}'s basket`}</UserConsumer>
       </h4>
@@ -50,16 +65,27 @@ function Basket({ title = "Basket", total, orderProducts }) {
       <BasketRow label="Sub-total" content={money(total)} />
       <BasketRow label="Delivery costs:" content="FREE" />
       <BasketRow label="total" content={money(total)} bold />
-      <Link to="/checkout">
-        <Button primary block>
-          checkout
+      {checkoutMatch ? (
+        <Button primary block onClick={makeOrder}>
+          make order
         </Button>
-      </Link>
+      ) : (
+        <Link to="/checkout">
+          <Button primary block>
+            Checkout
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
 
-export default connect((state) => ({
-  total: totalSelector(state),
-  orderProducts: orderProductsSelector(state),
-}))(Basket);
+export default connect(
+  (state) => ({
+    total: totalSelector(state),
+    orderProducts: orderProductsSelector(state),
+    checkoutMatch: checkoutMatchSelector(state),
+    loading: orderLoadingSelector(state),
+  }),
+  { makeOrder }
+)(Basket);
