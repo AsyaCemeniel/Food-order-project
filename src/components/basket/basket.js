@@ -20,6 +20,8 @@ import { makeOrder } from "../../redux/actions";
 
 import { Consumer as UserConsumer } from "../../contexts/user";
 
+import { useMoney } from "../../hooks/use-money";
+
 function Basket({
   title = "Basket",
   total,
@@ -28,6 +30,7 @@ function Basket({
   makeOrder,
   loading,
 }) {
+  const m = useMoney();
   if (!total) {
     return (
       <div className={styles.basket}>
@@ -63,9 +66,9 @@ function Basket({
         ))}
       </TransitionGroup>
       <hr className={styles.hr} />
-      <BasketRow label="Sub-total" content={`${total} $`} />
+      <BasketRow label="Sub-total" content={m(total)} />
       <BasketRow label="Delivery costs:" content="FREE" />
-      <BasketRow label="total" content={`${total} $`} bold />
+      <BasketRow label="total" content={m(total)} bold />
       {checkoutMatch ? (
         <Button primary block onClick={makeOrder}>
           make order
